@@ -16,6 +16,12 @@ import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModulesRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentsRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentsRoutes from  "./Kambaz/Enrollments/routes.js";
+import mongoose from "mongoose";
+
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
+
+mongoose.connect(CONNECTION_STRING);
+
 
 
 const app = express();      // create instance
@@ -74,7 +80,7 @@ app.use(express.json());
 //3. Attaches to Request: It then attaches this resulting JavaScript object to the req.body property of the request object.
 
 Hello(app);
-UserRoutes(app, db);
+UserRoutes(app);
 EnrollmentsRoutes(app, db);
 CourseRoutes(app, db);
 ModulesRoutes(app, db);
