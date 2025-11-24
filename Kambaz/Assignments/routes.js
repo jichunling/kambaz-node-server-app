@@ -1,26 +1,30 @@
 import AssignmentsDao from "./dao.js";
 
-export default function AssignmentsRoutes(app, db) {
-  const dao = AssignmentsDao(db);
+export default function AssignmentsRoutes(app) {
+  const dao = AssignmentsDao();
 
-  const findAssignmentsForCourse = (req, res) => {
+  const findAssignmentsForCourse = async(req, res) => {
+    console.log('----Assignments Routes------');
+    console.log('🔍 Route params:', req.params);
+    console.log('🔍 Course ID:', req.params.courseId);
     const { courseId } = req.params;
-    const assignments = dao.findAssignmentsForCourse(courseId);
-    console.log("Found assignments:", assignments);
+    const assignments = await dao.findAssignmentsForCourse(courseId);
+    console.log('🔍 Assignments found:', assignments);
+    console.log('🔍 Count:', assignments.length);
     res.json(assignments);
   }
-  const createAssignmentForCourse = (req, res) => {
-  const { courseId } = req.params;
-  const assignment = {
+  const createAssignmentForCourse = async(req, res) => {
+    const { courseId } = req.params;
+    const assignment = {
     ...req.body,
     course: courseId,
   };
-  const newAssignment = dao.createAssignment(assignment);
+  const newAssignment = await dao.createAssignment(assignment);
   res.send(newAssignment);
 }
-const deleteAssignment = (req, res) => {
+const deleteAssignment = async(req, res) => {
   const { assignmentId } = req.params;
-  const status = dao.deleteAssignment(assignmentId);
+  const status = await dao.deleteAssignment(assignmentId);
   res.send(status);
 }
 const updateAssignment = async (req, res) => {
@@ -30,13 +34,13 @@ const updateAssignment = async (req, res) => {
   res.send(status);
 }
 //get assignment by ID
-const findAssignmentById = (req, res) => {
+const findAssignmentById = async(req, res) => {
    console.log("=== ROUTES: findAssignmentById called ===");
    console.log("Full req.params:", req.params);
    console.log("assignmentId from params:", req.params.assignmentId);
     const { assignmentId } = req.params;
     console.log("Extracted assignmentId:", assignmentId);
-    const assignment = dao.findAssignmentById(assignmentId); // ← FIXED: Remove dao.assignments and .find()
+    const assignment = await dao.findAssignmentById(assignmentId); // ← FIXED: Remove dao.assignments and .find()
     if (!assignment) {
       return res.status(404).json({ error: "Assignment not found" });
     }

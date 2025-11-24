@@ -1,5 +1,5 @@
 import ModulesDao from "../Modules/dao.js";
-import db from "../Database/index.js";
+
 
 
 export default function ModulesRoutes(app, db) {
@@ -24,9 +24,11 @@ const deleteModule = async (req, res) => {
   res.send(status);
 }
 const updateModule =  async (req, res) => {
+    console.log('---Modules Routes----')
     const { courseId, moduleId } = req.params;
     const moduleUpdates = req.body;
     const status =  await dao.updateModule(courseId, moduleId, moduleUpdates);
+    console.log('Sent routes to dao')
     res.send(status);
   }
   

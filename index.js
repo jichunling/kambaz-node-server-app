@@ -8,7 +8,6 @@ import PathParameters from "./Lab5/PathParameters.js"
 import QueryParameters from "./Lab5/QueryParameters.js"
 import WorkingWithObjects from "./Lab5/WorkingWithObjects.js"
 import WorkingWithArrays from "./Lab5/WorkingWithArrays.js"
-import db from "./Kambaz/Database/index.js";
 import "dotenv/config";
 import session from "express-session";
 import UserRoutes from "./Kambaz/Users/routes.js";
@@ -81,10 +80,10 @@ app.use(express.json());
 
 Hello(app);
 UserRoutes(app);
-EnrollmentsRoutes(app, db);
-CourseRoutes(app, db);
-ModulesRoutes(app, db);
-AssignmentsRoutes(app, db);
+EnrollmentsRoutes(app);
+CourseRoutes(app);
+ModulesRoutes(app);
+AssignmentsRoutes(app);
 
 Lab5(app);
 PathParameters(app);

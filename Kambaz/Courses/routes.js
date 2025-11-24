@@ -1,35 +1,38 @@
 
-import CoursesDao from "./dao.js";
+import * as CoursesDao from "./dao.js";
 import * as moduleDao from "../Modules/dao.js";
 import EnrollmentsDao from "../Enrollments/dao.js";
 
 export default function CourseRoutes(app) {
-  const dao = CoursesDao();
+  //const dao = CoursesDao();
   const enrollmentsDao = EnrollmentsDao();
   
   const findAllCourses = async (req, res) => {
-    const courses = await dao.findAllCourses();
+    const courses = await CoursesDao.findAllCourses();
     res.send(courses);
   }
 
 const createCourse = async(req, res) => {
+  console.log('-------Hitting Course Routes createCourse--------');
   const currentUser = req.session["currentUser"];
   if (!currentUser) {console.log("currentUser works");}
   else {console.log("Null: currentUser works")}
-  const newCourse =  await dao.createCourse(req.body);
+  console.log('Before Course Routes createCourse');
+  const newCourse =  await CoursesDao.createCourse(req.body);
+  console.log('Sucessfuly Create Course', newCourse.name);
   enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
   res.json(newCourse);//only response the new course, not all courses
 };
 const deleteCourse = async(req, res) => {
   const { courseId } = req.params;
   await enrollmentsDao.unenrollAllUsersFromCourse(courseId);
-  const status =  await dao.deleteCourse(courseId);
+  const status =  await CoursesDao.deleteCourse(courseId);
   res.send(status);
 }
 const updateCourse = async(req, res) => {
   const { courseId } = req.params;
   const courseUpdates = req.body;
-  const status = await dao.updateCourse(courseId, courseUpdates);
+  const status = await CoursesDao.updateCourse(courseId, courseUpdates);
   res.send(status);
 }
 const findCoursesForEnrolledUser = async (req, res) => {
@@ -42,7 +45,7 @@ const findCoursesForEnrolledUser = async (req, res) => {
     }
     userId = currentUser._id;
   }
-  const courses = await dao.findCoursesForEnrolledUser(userId);
+  const courses = await CoursesDao.findCoursesForEnrolledUser(userId);
   console.log(courses);
   res.json(courses);
 };
@@ -64,7 +67,7 @@ const findUsersForCourse = async (req, res) => {
 app.get("/api/courses", findAllCourses);
 app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
 app.get("/api/courses/:cid/users", findUsersForCourse);
-app.post("/api/users/current/courses", createCourse);
+app.post("/api/courses", createCourse);
 app.delete("/api/courses/:courseId",deleteCourse);
 app.put("/api/courses/:courseId", updateCourse);
 app.post("/api/users/:courseId/modules", createModuleForCourse);

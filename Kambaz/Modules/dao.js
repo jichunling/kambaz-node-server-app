@@ -1,4 +1,4 @@
-import Database from "../Database/index.js";
+
 import { v4 as uuidv4 } from "uuid";
 import courseModel from "../Courses/model.js";
 
@@ -33,10 +33,25 @@ export default function ModulesDao() {
   // db.modules = modules.filter((module) => module._id !== moduleId);
 }
 async function updateModule(courseId, moduleId, moduleUpdates) {
+  console.log('-----Modules DAO updateModule----');
+  console.log('courseId:', courseId);
+  console.log('moduleId:', moduleId);
+  console.log('moduleUpdates:', moduleUpdates);
+
   const course = await courseModel.findById(courseId); //retreat course
+  console.log('Found course?', course ? 'YES' : 'NO');
+  console.log('Course modules count:', course?.modules?.length);
+  
   const module = course.modules.id(moduleId);
+  console.log('Found module?', module ? 'YES' : 'NO');
+  console.log('Module before update:', JSON.stringify(module));
+  
   Object.assign(module, moduleUpdates);
-  await course.save(); //save the course back
+  console.log('Module after update:', JSON.stringify(module));
+  
+  const result = await course.save(); //save the course back
+  console.log('Save result:', result);
+  console.log('Successfully update module for course: ', courseId);
   return module;
 
   // const { modules } = db;

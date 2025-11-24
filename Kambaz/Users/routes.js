@@ -1,5 +1,8 @@
 import UsersDao from "./dao.js";
-import db from "../Database/index.js";
+//import db from "../Database/index.js";
+import * as coursesDao from "../Courses/dao.js";
+import * as enrollmentsDao from "../Enrollments/dao.js";
+
 export default function UserRoutes(app) {
   const dao = UsersDao();
   const createUser = (req, res) => { };
@@ -61,37 +64,67 @@ export default function UserRoutes(app) {
         req.session.destroy();
         res.sendStatus(200);
     };
-    const findMyEnrolledCourses = (req, res) => {
-    const currentUser = req.session["currentUser"];
-    if (!currentUser) {
+    const findMyEnrolledCourses = async(req, res) => {
+      const currentUser = req.session["currentUser"];
+      if (!currentUser) {
         res.sendStatus(401);
         return;
-    }
+      }
     // Find all courses the user is enrolled in
     //用dao,不用local DB.首先在Dao里implement这个function
-    const enrolledCourses = db.courses.filter(course => 
-        db.enrollments?.some(e => 
-            e.user === currentUser._id && e.course === course._id
-        )
-    );
-    res.json(enrolledCourses);
+    // const enrolledCourses = db.courses.filter(course => 
+    //     db.enrollments?.some(e => 
+    //         e.user === currentUser._id && e.course === course._id
+    //     )
+    // );
+try {
+      const enrolledCourses = await coursesDao.findCoursesForEnrolledUser(currentUser._id);
+      res.json(enrolledCourses);
+}catch (error) {
+    console.error("Error fetching enrolled courses:", error);
+    res.sendStatus(500);
+  }
 };
 
-const enrollInCourse = (req, res) => {
+// const enrollInCourse = (req, res) => {
+//     const currentUser = req.session["currentUser"];
+//     if (!currentUser) {
+//         res.sendStatus(401);
+//         return;
+//     }
+//     const course = req.body;
+//     // Add enrollment logic here
+//     const newEnrollment = {
+//         _id: new Date().getTime().toString(),
+//         user: currentUser._id,
+//         course: course._id
+//     };
+//     db.enrollments = [...(db.enrollments || []), newEnrollment];
+//     res.json(course);
+// };
+const enrollInCourse = async (req, res) => {
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
         res.sendStatus(401);
         return;
     }
-    const course = req.body;
-    // Add enrollment logic here
-    const newEnrollment = {
-        _id: new Date().getTime().toString(),
-        user: currentUser._id,
-        course: course._id
-    };
-    db.enrollments = [...(db.enrollments || []), newEnrollment];
-    res.json(course);
+    const {courseId} = req.body;
+    if (!courseId) {
+    res.status(400).json({ error: "courseId is required" });
+    return;
+  }
+    try {
+    const enrollment = await enrollmentsDao.enrollUserInCourse(
+      currentUser._id,
+      courseId
+    );
+
+    // You can choose what to return: the enrollment, or just { ok: true }
+    res.json(enrollment);
+  } catch (error) {
+    console.error("Error enrolling in course:", error);
+    res.sendStatus(500);
+  }
 };
 
 

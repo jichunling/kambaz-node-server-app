@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import model from "./model.js";
+
+
 export default function UsersDao() {
 
 //Creating Users
@@ -14,8 +16,12 @@ const findAllUsers = () => model.find();//All data in the users collection. retu
 
 const findUserById = (userId) => model.findById(userId);//just return an object. 
 
-const findUserByUsername = (username) => model.findOne({ username: username });//because username is unique
-   //users.find((user) => user.username === username);
+const findUserByUsername = (username) => { 
+   console.log('----Users DAO findUserByUsername-----');
+   console.log('username: ', {username})
+   model.findOne({ username: username });//because username is unique
+   
+   }
 
 const findUserByCredentials = (username, password) => model.findOne({ username, password });
    // users.find((user) =>
