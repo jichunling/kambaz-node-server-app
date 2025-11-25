@@ -27,11 +27,16 @@ export default function AssignmentsDao() {
   return assignments;
 
  }
- function deleteAssignment(assignmentId) {
-  const assignments = model.find();
+ async function deleteAssignment(courseId, assignmentId) {
+  console.log('----Assignments DAO deleteAssignment------');
+  const course = await courseModel.updateOne({_id: courseId}, { $pull: {assignments: {_id: assignmentId}}});
+  console.log('Successful deteled');
+  return course;
+  // const assignments = model.find();
   //db.assignments = assignments.filter((assignment) => assignment._id !== assignmentId);
-  return {status: "ok"};
+  //return {status: "ok"};
 }
+
 async function updateAssignment(courseId, assignmentId, assignmentUpdates) {
   console.log('----Assignment DAO updateAssignment----')
   const course = await courseModel.findById(courseId);

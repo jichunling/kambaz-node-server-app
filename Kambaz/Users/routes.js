@@ -1,19 +1,41 @@
 import UsersDao from "./dao.js";
-//import db from "../Database/index.js";
 import * as coursesDao from "../Courses/dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
 
 export default function UserRoutes(app) {
   const dao = UsersDao();
-  const createUser = (req, res) => { };
-  const deleteUser = (req, res) => { };
-  const findAllUsers = (req, res) => { };
-  const findUserById = (req, res) => { };
+  const createUser = async (req, res) => { };
+  const deleteUser = async (req, res) => {
+    const status = await dao.deleteUser(req.params.userId);
+    res.json(status);
+};
+  const findAllUsers = async (req, res) => {
+    const { role, name} = req.query;
+    if (role) {
+      const users = await dao.findUsersByRole(role);
+      res.json(users);
+      return;
+    }
+    if (name) {
+      const users = await 
+        dao.findUsersByPartialName(name);
+      res.json(users);
+      return;
+    }
+
+    const users = await dao.findAllUsers();
+    res.json(users);
+  };
+
+  const findUserById = async(req, res) => {
+    const user = await dao.findUserById(req.params.userId);
+    res.json(user);
+
+   };
   
   app.post("/api/users", createUser);
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
- 
   app.delete("/api/users/:userId", deleteUser);
 
   const signup = async(req, res) => { 
@@ -52,12 +74,22 @@ export default function UserRoutes(app) {
     };
     
     const updateUser = async(req, res) => {
-        const userId = req.params.userId;
-        const userUpdates = req.body;
-        await dao.updateUser(userId, userUpdates);
-        const currentUser = dao.findUserById(userId);
-        req.session["currentUser"] = currentUser;
-        res.json(currentUser);
+      console.log('---Users Routes update User---');
+      const { userId } = req.params;
+      const userUpdates = req.body;
+      console.log('---About Calling DAO to update User',userId);
+      const updatedUser = await dao.updateUser(userId, userUpdates);
+      if (!updatedUser) {
+        return res.sendStatus(404);
+      }
+      console.log('Called DAO updatedUser', updatedUser);
+      
+      const currentUser = req.session["currentUser"];
+      if (currentUser && currentUser._id === userId) {
+        req.session["currentUser"] = { ...currentUser, ...userUpdates };
+      }
+     
+    res.json(updatedUser);
     };
 
     const signout = (req, res) => {
