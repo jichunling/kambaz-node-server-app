@@ -8,7 +8,9 @@ const courseSchema = new mongoose.Schema({
    credits: Number,
    description: String,
    modules: [moduleSchema],
-   assignments: [assignmentSchema]
+   assignments: {
+    type: [assignmentSchema], 
+    default: [], },
  },
  { collection: "courses" });
 export default courseSchema;

@@ -8,6 +8,7 @@ const assignmentSchema = new mongoose.Schema({
     dueDate: { type: Date },
     AvailableFrom: { type: Date },
     AvailableUntil: { type: Date }
- },
+ },  
+ { _id: false }, // <-- prevent Mongoose from making its own ObjectId
  { collection: "assignments" });
 export default assignmentSchema;

@@ -15,8 +15,11 @@ export default function CourseRoutes(app) {
 const createCourse = async(req, res) => {
   console.log('-------Hitting Course Routes createCourse--------');
   const currentUser = req.session["currentUser"];
-  if (!currentUser) {console.log("currentUser works");}
-  else {console.log("Null: currentUser works")}
+  if (!currentUser) {
+    console.log("No currentUser in session, cannot create course");
+    return res.sendStatus(401);
+  }
+  
   console.log('Before Course Routes createCourse');
   const newCourse =  await CoursesDao.createCourse(req.body);
   console.log('Sucessfuly Create Course', newCourse.name);
