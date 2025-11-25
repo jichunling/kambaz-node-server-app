@@ -52,6 +52,7 @@ const findCoursesForEnrolledUser = async (req, res) => {
 const findModulesForCourse = async (req, res) => {};
 
 const createModuleForCourse = async(req, res) => {
+  console.log('----Inside Course Route createModuleForCourse---- ')
     const { courseId } = req.params;
     const module = {...req.body, course: courseId};
     const newModule = await moduleDao.createModule(module);
@@ -62,6 +63,15 @@ const findUsersForCourse = async (req, res) => {
     const users = await enrollmentsDao.findUsersForCourse(cid);
     res.json(users);
   }
+
+
+  //新加的
+const createAssignmentForCourse = async(req, res) => {
+    const { courseId } = req.params;
+    const assignment = {...req.body, course: courseId};
+    const newAssignment = await moduleDao.createAssignment(assignment);
+    res.send(newAssignment);
+}
   
 
 app.get("/api/courses", findAllCourses);
@@ -71,4 +81,5 @@ app.post("/api/courses", createCourse);
 app.delete("/api/courses/:courseId",deleteCourse);
 app.put("/api/courses/:courseId", updateCourse);
 app.post("/api/users/:courseId/modules", createModuleForCourse);
+app.post("/api/users/:courseId/assignments", createAssignmentForCourse);//新加的
 }

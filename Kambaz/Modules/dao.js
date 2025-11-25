@@ -5,6 +5,7 @@ import courseModel from "../Courses/model.js";
 export default function ModulesDao() {
  //accept newModule as a param
  async function createModule(courseId, module) {
+  console.log('---inside ModulesDao createModule---')
    const newModule = { ...module, _id: uuidv4() };
    const status = await courseModel.updateOne( { _id: courseId },{ $push: { modules: newModule } });
    return newModule;
@@ -48,7 +49,7 @@ async function updateModule(courseId, moduleId, moduleUpdates) {
   
   Object.assign(module, moduleUpdates);
   console.log('Module after update:', JSON.stringify(module));
-  
+
   const result = await course.save(); //save the course back
   console.log('Save result:', result);
   console.log('Successfully update module for course: ', courseId);

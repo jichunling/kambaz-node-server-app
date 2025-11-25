@@ -3,14 +3,20 @@ import model from "./model.js"
 import courseModel from "../Courses/model.js"
 
 export default function AssignmentsDao() {
-  async function createAssignment(assignment) {
-    console.log('----AssignmentDao createAssignment----')
+  async function createAssignment(courseId, assignment) {
+    console.log('----Hitting AssignmentDao createAssignment----');
+    console.log('Received assignment data:', JSON.stringify(assignment, null, 2));  
+    if (!assignment.name) {
+        throw new Error('Assignment name is required');
+    }
     const newAssignment = {...assignment, _id:uuidv4()};
     console.log('newAssignment id: ', newAssignment._id);
-    const createdAssignment = await model.create(newAssignment);
-    console.log('After Creating Assignment')
-    return createdAssignment;
-    //Database.assignments = [...Database.assignments, newAssignment];
+    console.log('newAssignment full:', JSON.stringify(newAssignment, null, 2)); 
+    
+    const status = await courseModel.updateOne( { _id: courseId },{ $push: { assignments: newAssignment } });
+    console.log('Create Assignment Status', status);
+    return newAssignment;
+  
     
  };
  async function findAssignmentsForCourse(courseId) {
@@ -23,26 +29,36 @@ export default function AssignmentsDao() {
  }
  function deleteAssignment(assignmentId) {
   const assignments = model.find();
-  db.assignments = assignments.filter((assignment) => assignment._id !== assignmentId);
+  //db.assignments = assignments.filter((assignment) => assignment._id !== assignmentId);
   return {status: "ok"};
 }
-function updateAssignment(assignmentId, assignmentUpdates) {
-  const assignments = model.find();
-  const assignment = assignments.find((assignment) =>
-    assignment._id === assignmentId);
+async function updateAssignment(courseId, assignmentId, assignmentUpdates) {
+  console.log('----Assignment DAO updateAssignment----')
+  const course = await courseModel.findById(courseId);
+  const assignment = course.assignments.id(assignmentId);
+
   if (!assignment) {
     throw new Error(`Assignment with id ${assignmentId} not found`);
   }
     Object.assign(assignment, assignmentUpdates);
+    const result = await course.save();
+    console.log('Save result', result);
     return assignment;
 }
-function findAssignmentById(assignmentId) {
+async function findAssignmentById(assignmentId) {
   console.log("DAO: Looking for assignments in course:", assignmentId);
-   const assignments = model.find();
-   console.log("DAO: Found all assignments:", assignments);
-    const result = assignments.filter((assignment) => assignment._id === assignmentId);
-    console.log("DAO: Found assignments:", result);
-    return result;
+   const course = await courseModel.findOne(
+    { "assignments._id": assignmentId }, // match embedded assignment by id
+    { "assignments.$": 1 }               // projection: only the matching element
+  ).lean();
+  if (!course || !course.assignments || course.assignments.length === 0) {
+    console.log("DAO: Assignment not found");
+    return null;
+  }
+
+  const assignment = course.assignments[0];
+  console.log("DAO: Found assignment:", assignment);
+  return assignment;
  }
 
 

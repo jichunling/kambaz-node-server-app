@@ -11,10 +11,9 @@ export default function ModulesRoutes(app, db) {
   }
   
 const createModuleForCourse = async (req, res) => {
+  console.log('----Module Routes createModuleForCourse------');
   const { courseId } = req.params;
-  const module = {
-    ...req.body,
-  };
+  const module = {...req.body,};
   const newModule = await dao.createModule(courseId, module);
   res.send(newModule);
 }
@@ -34,7 +33,8 @@ const updateModule =  async (req, res) => {
   
 
 
-app.post("/api/courses/:courseId/modules",createModuleForCourse);
+app.post("/api/courses/:courseId/modules",createModuleForCourse);//这个没有被call. 到底哪个routes是对的。
+//call 了Courese/routes里面的
 app.get("/api/courses/:courseId/modules",findModulesForCourse);
 app.delete("/api/courses/:courseId/modules/:moduleId",deleteModule);
 app.put("/api/courses/:courseId/modules/:moduleId", updateModule);
