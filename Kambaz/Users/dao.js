@@ -4,9 +4,12 @@ export default function UsersDao() {
 
 //Creating Users
 const createUser = async (user) => {
+   console.log('---User DAO create User---');
    const newUser = { ...user, _id: uuidv4() };
    //users = [...users, newUser];
-   return await model.create(newUser);
+   const result = await model.create(newUser);
+   console.log('After DAO create User', newUser._id);
+   return result;
  };
 
  //Finding Users

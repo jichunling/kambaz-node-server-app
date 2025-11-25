@@ -5,10 +5,12 @@ import * as enrollmentsDao from "../Enrollments/dao.js";
 export default function UserRoutes(app) {
   const dao = UsersDao();
   const createUser = async (req, res) => {
+    console.log('---User Route create User---')
     const user = await dao.createUser(req.body);
+    console.log('After User Route create User: ', user._id);
     res.json(user);
    };
-   
+
   const deleteUser = async (req, res) => {
     const status = await dao.deleteUser(req.params.userId);
     res.json(status);

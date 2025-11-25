@@ -38,7 +38,7 @@ import enrollementModel from "../Enrollments/model.js"
     //without async and await:
     //It starts saving but doesn't wait and returns undefined immediately!
     export async function createCourse(course) {
-        console.log('-------Hitting Course DAO createCourse!!!!--------');
+        console.log('-------Hitting Course DAO createCourse--------');
         const cleanCourse = { ...course, assignments: [] };
         const newCourse = await model.create(cleanCourse);
         return newCourse;
