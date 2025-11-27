@@ -17,11 +17,8 @@ import AssignmentsRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentsRoutes from  "./Kambaz/Enrollments/routes.js";
 import mongoose from "mongoose";
 
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
-
+const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
 mongoose.connect(CONNECTION_STRING);
-
-
 
 const app = express();      // create instance
 
@@ -37,6 +34,8 @@ const app = express();      // create instance
 app.use(cors({credentials: true,   
     origin: process.env.CLIENT_URL ||"http://localhost:3000",
 }));
+
+app.set("trust proxy", 1);// Trust proxy (important for secure cookies on Render/HTTPS)
 
 const isProduction = process.env.NODE_ENV === "production";
 //2. Session Configuration (Making HTTP State-Aware)
@@ -59,7 +58,11 @@ if (process.env.SERVER_ENV !== "development") {
   sessionOptions.cookie = {
     sameSite: isProduction ? "none" : "lax",
     secure: isProduction,
-    domain: process.env.SERVER_URL,
+    //domain: process.env.SERVER_URL,
+    //don't set domain to SERVER_URL – that breaks cookies
+    // domain should be just the backend host if you ever use it,
+    // but we can omit it and let the browser handle it:
+    // domain: "kambaz-node-a6.onrender.com",
   };
 }
 //C. Applying the Middleware
@@ -90,7 +93,13 @@ PathParameters(app);
 QueryParameters(app);
 WorkingWithObjects(app);
 WorkingWithArrays(app);
-app.listen(process.env.PORT ||4000);   
+//app.listen(process.env.PORT ||4000);   原来
+
+// ✅ Render will inject PORT; fallback for local dev
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
 //In Production (Deployment): When you deploy a web application 
 // (e.g., to platforms like Heroku, Vercel, or AWS), 
 // the hosting environment often automatically defines 
