@@ -18,7 +18,17 @@ import EnrollmentsRoutes from  "./Kambaz/Enrollments/routes.js";
 import mongoose from "mongoose";
 
 const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
-mongoose.connect(CONNECTION_STRING);
+console.log(
+  "MongoDB connection string prefix:",
+  CONNECTION_STRING.split("@")[0]
+);
+mongoose.connect(CONNECTION_STRING)
+.then(() => {
+    console.log("✅ Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection error", err);
+  });;
 
 const app = express();      // create instance
 
