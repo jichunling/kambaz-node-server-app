@@ -1,7 +1,10 @@
 
 import * as CoursesDao from "./dao.js";
 import * as moduleDao from "../Modules/dao.js";
+import * as assignmentDao from "../Assignments/dao.js";
 import EnrollmentsDao from "../Enrollments/dao.js";
+import { createQuiz, findQuizzesForCourse, deleteQuiz, updateQuiz } from "../Quizzes/dao.js";
+
 
 export default function CourseRoutes(app) {
   //const dao = CoursesDao();
@@ -68,12 +71,19 @@ const findUsersForCourse = async (req, res) => {
   }
 
 
-  //新加的
 const createAssignmentForCourse = async(req, res) => {
     const { courseId } = req.params;
     const assignment = {...req.body, course: courseId};
-    const newAssignment = await moduleDao.createAssignment(assignment);
+    const newAssignment = await assignmentDao.createAssignment(assignment);
     res.send(newAssignment);
+}
+
+const createQuizForCourse = async(req, res) => {
+  console.log('----Inside Course Route create Quiz For Course---- ')
+    const { courseId } = req.params;
+    const quiz = {...req.body, course: courseId};
+    const newQuiz = await createQuiz(courseId, quiz);
+    res.send(newQuiz);
 }
   
 
@@ -85,4 +95,6 @@ app.delete("/api/courses/:courseId",deleteCourse);
 app.put("/api/courses/:courseId", updateCourse);
 app.post("/api/users/:courseId/modules", createModuleForCourse);
 app.post("/api/users/:courseId/assignments", createAssignmentForCourse);//新加的
+app.post("/api/courses/:courseId/quizzes", createQuizForCourse);//新加的
+
 }

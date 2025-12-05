@@ -67,5 +67,4 @@ import enrollementModel from "../Enrollments/model.js"
         return result;
     }
 
-   // return { findAllCourses, findCoursesForEnrolledUser, createCourse, deleteCourse, updateCourse };
-
+  

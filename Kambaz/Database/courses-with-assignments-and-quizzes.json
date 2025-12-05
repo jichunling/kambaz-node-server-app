@@ -1,0 +1,690 @@
+[
+  {
+    "_id": "RS101",
+    "name": "Rocket Propulsion",
+    "number": "RS4550",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "D123",
+    "credits": 4,
+    "description": "This course provides an in-depth study of the fundamentals of rocket propulsion, covering topics such as propulsion theory, engine types, fuel chemistry, and the practical applications of rocket technology. Designed for students with a strong background in physics and engineering, the course includes both theoretical instruction and hands-on laboratory work",
+    "modules": [
+      {
+        "_id": "M101",
+        "name": "Introduction to Rocket Propulsion",
+        "description": "Basic principles of rocket propulsion and rocket engines.",
+        "lessons": [
+          {
+            "_id": "L101",
+            "name": "History of Rocketry",
+            "description": "A brief history of rocketry and space exploration."
+          },
+          {
+            "_id": "L102",
+            "name": "Rocket Propulsion Fundamentals",
+            "description": "Basic principles of rocket propulsion."
+          },
+          {
+            "_id": "L103",
+            "name": "Rocket Engine Types",
+            "description": "Overview of different types of rocket engines."
+          }
+        ]
+      },
+      {
+        "_id": "M102",
+        "name": "Fuel and Combustion",
+        "description": "Understanding rocket fuel, combustion processes, and efficiency.",
+        "lessons": [
+          {
+            "_id": "L201",
+            "name": "Rocket Fuel",
+            "description": "Overview of different types of rocket fuels."
+          },
+          {
+            "_id": "L202",
+            "name": "Combustion Processes",
+            "description": "Understanding combustion processes and efficiency."
+          },
+          {
+            "_id": "L203",
+            "name": "Combustion Instability",
+            "description": "Understanding combustion instability and mitigation."
+          }
+        ]
+      },
+      {
+        "_id": "M103",
+        "name": "Nozzle Design",
+        "description": "Principles of rocket nozzle design and performance optimization.",
+        "lessons": [
+          {
+            "_id": "L301",
+            "name": "Nozzle Design",
+            "description": "Overview of different types of rocket nozzles."
+          },
+          {
+            "_id": "L302",
+            "name": "Nozzle Performance",
+            "description": "Understanding nozzle performance and efficiency."
+          },
+          {
+            "_id": "L303",
+            "name": "Nozzle Optimization",
+            "description": "Optimizing nozzle design for specific applications."
+          }
+        ]
+      }
+    ],
+    "assignments": [
+      {
+        "_id": "A101",
+        "name": "Rocket Engine Analysis Report",
+        "points": 100,
+        "description": "Analyze performance parameters of a selected rocket engine model.",
+        "dueDate": "2023-02-05T00:00:00.000Z",
+        "AvailableFrom": "2023-01-15T00:00:00.000Z",
+        "AvailableUntil": "2023-02-06T00:00:00.000Z"
+      },
+      {
+        "_id": "A102",
+        "name": "Fuel Combustion Efficiency Study",
+        "points": 120,
+        "description": "Compare efficiency of several liquid and solid rocket propellants.",
+        "dueDate": "2023-03-05T00:00:00.000Z",
+        "AvailableFrom": "2023-02-10T00:00:00.000Z",
+        "AvailableUntil": "2023-03-06T00:00:00.000Z"
+      },
+      {
+        "_id": "A103",
+        "name": "Nozzle Optimization Project",
+        "points": 150,
+        "description": "Design and optimize rocket nozzles using simulation tools.",
+        "dueDate": "2023-04-10T00:00:00.000Z",
+        "AvailableFrom": "2023-03-15T00:00:00.000Z",
+        "AvailableUntil": "2023-04-11T00:00:00.000Z"
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q101",
+        "title": "Rocket Propulsion Fundamentals Quiz",
+        "dueDate": "2023-01-25T23:59:59.000Z",
+        "availableFrom": "2023-01-20T00:00:00.000Z",
+        "availableUntil": "2023-01-26T23:59:59.000Z",
+        "points": 50
+      },
+      {
+        "_id": "Q102",
+        "title": "Fuel Chemistry and Combustion Quiz",
+        "dueDate": "2023-02-15T23:59:59.000Z",
+        "availableFrom": "2023-02-10T00:00:00.000Z",
+        "availableUntil": "2023-02-16T23:59:59.000Z",
+        "points": 40
+      },
+      {
+        "_id": "Q103",
+        "title": "Nozzle Design Principles Quiz",
+        "dueDate": "2023-03-20T23:59:59.000Z",
+        "availableFrom": "2023-03-15T00:00:00.000Z",
+        "availableUntil": "2023-03-21T23:59:59.000Z",
+        "points": 45
+      },
+      {
+        "_id": "Q104",
+        "title": "Comprehensive Rocket Systems Quiz",
+        "dueDate": "2023-04-25T23:59:59.000Z",
+        "availableFrom": "2023-04-20T00:00:00.000Z",
+        "availableUntil": "2023-04-26T23:59:59.000Z",
+        "points": 60
+      }
+    ]
+  },
+  {
+    "_id": "RS102",
+    "name": "Aerodynamics",
+    "number": "RS4560",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "D123",
+    "credits": 3,
+    "description": "This course offers a comprehensive exploration of aerodynamics, focusing on the principles and applications of airflow and its effects on flying objects. Topics include fluid dynamics, airfoil design, lift and drag forces, and the aerodynamic considerations in aircraft design. The course blends theoretical learning with practical applications, suitable for students pursuing a career in aeronautics or astronautics engineering.",
+    "modules": [
+      {
+        "_id": "M201",
+        "name": "Fundamentals of Aerodynamics",
+        "description": "Basic aerodynamic concepts and fluid dynamics principles."
+      },
+      {
+        "_id": "M202",
+        "name": "Subsonic and Supersonic Flow",
+        "description": "Understanding subsonic and supersonic aerodynamic behaviors."
+      },
+      {
+        "_id": "M203",
+        "name": "Aerodynamic Heating",
+        "description": "Study of aerodynamic heating and thermal protection systems."
+      }
+    ],
+    "assignments": [
+      {
+        "_id": "A201",
+        "name": "Airfoil Lift Simulation",
+        "points": 80,
+        "description": "Simulate lift characteristics for multiple airfoil profiles.",
+        "dueDate": "2023-02-08T00:00:00.000Z",
+        "AvailableFrom": "2023-01-20T00:00:00.000Z",
+        "AvailableUntil": "2023-02-09T00:00:00.000Z"
+      },
+      {
+        "_id": "A202",
+        "name": "Shockwave Analysis",
+        "points": 110,
+        "description": "Analyze normal and oblique shockwaves in supersonic flow.",
+        "dueDate": "2023-03-12T00:00:00.000Z",
+        "AvailableFrom": "2023-02-20T00:00:00.000Z",
+        "AvailableUntil": "2023-03-13T00:00:00.000Z"
+      },
+      {
+        "_id": "A203",
+        "name": "Thermal Protection Report",
+        "points": 120,
+        "description": "Evaluate aerodynamic heating and propose thermal protection strategies.",
+        "dueDate": "2023-04-18T00:00:00.000Z",
+        "AvailableFrom": "2023-03-20T00:00:00.000Z",
+        "AvailableUntil": "2023-04-19T00:00:00.000Z"
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q201",
+        "title": "Fluid Dynamics Basics Quiz",
+        "dueDate": "2023-01-28T23:59:59.000Z",
+        "availableFrom": "2023-01-23T00:00:00.000Z",
+        "availableUntil": "2023-01-29T23:59:59.000Z",
+        "points": 35
+      },
+      {
+        "_id": "Q202",
+        "title": "Airfoil Design and Lift Quiz",
+        "dueDate": "2023-02-18T23:59:59.000Z",
+        "availableFrom": "2023-02-13T00:00:00.000Z",
+        "availableUntil": "2023-02-19T23:59:59.000Z",
+        "points": 40
+      },
+      {
+        "_id": "Q203",
+        "title": "Supersonic Flow and Shockwaves Quiz",
+        "dueDate": "2023-03-22T23:59:59.000Z",
+        "availableFrom": "2023-03-17T00:00:00.000Z",
+        "availableUntil": "2023-03-23T23:59:59.000Z",
+        "points": 50
+      },
+      {
+        "_id": "Q204",
+        "title": "Aerodynamic Heating Quiz",
+        "dueDate": "2023-04-28T23:59:59.000Z",
+        "availableFrom": "2023-04-23T00:00:00.000Z",
+        "availableUntil": "2023-04-29T23:59:59.000Z",
+        "points": 30
+      }
+    ]
+  },
+  {
+    "_id": "RS103",
+    "name": "Spacecraft Design",
+    "number": "RS4570",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "D123",
+    "credits": 4,
+    "description": "This course delves into the principles and practices of spacecraft design, offering students a detailed understanding of the engineering and technology behind spacecraft systems. Key topics include spacecraft structure, propulsion, power systems, thermal control, and payload integration. Emphasizing both theoretical concepts and practical skills, the course prepares students for careers in the space industry, with a focus on innovative design and problem-solving in the context of current and future space missions",
+    "modules": [
+      {
+        "_id": "M301",
+        "name": "Spacecraft Structural Design",
+        "description": "Fundamentals of designing spacecraft structures and materials selection."
+      },
+      {
+        "_id": "M302",
+        "name": "Orbital Mechanics",
+        "description": "Understanding orbital dynamics and mission planning."
+      },
+      {
+        "_id": "M303",
+        "name": "Spacecraft Systems Engineering",
+        "description": "Overview of spacecraft systems and subsystems engineering."
+      }
+    ],
+    "assignments": [
+      {
+        "_id": "A301",
+        "name": "Spacecraft Subsystem Integration",
+        "points": 100,
+        "description": "Design integration plan for power, thermal, and communication subsystems.",
+        "dueDate": "2023-02-14T00:00:00.000Z",
+        "AvailableFrom": "2023-01-25T00:00:00.000Z",
+        "AvailableUntil": "2023-02-15T00:00:00.000Z"
+      },
+      {
+        "_id": "A302",
+        "name": "Mission Design Project",
+        "points": 140,
+        "description": "Develop a complete mission profile for a Mars orbiter spacecraft.",
+        "dueDate": "2023-03-28T00:00:00.000Z",
+        "AvailableFrom": "2023-03-01T00:00:00.000Z",
+        "AvailableUntil": "2023-03-29T00:00:00.000Z"
+      },
+      {
+        "_id": "A303",
+        "name": "Structural Analysis Report",
+        "points": 110,
+        "description": "Perform finite element analysis on spacecraft structural components.",
+        "dueDate": "2023-05-02T00:00:00.000Z",
+        "AvailableFrom": "2023-04-10T00:00:00.000Z",
+        "AvailableUntil": "2023-05-03T00:00:00.000Z"
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q301",
+        "title": "Spacecraft Materials and Structures Quiz",
+        "dueDate": "2023-02-03T23:59:59.000Z",
+        "availableFrom": "2023-01-29T00:00:00.000Z",
+        "availableUntil": "2023-02-04T23:59:59.000Z",
+        "points": 45
+      },
+      {
+        "_id": "Q302",
+        "title": "Orbital Mechanics Fundamentals Quiz",
+        "dueDate": "2023-03-10T23:59:59.000Z",
+        "availableFrom": "2023-03-05T00:00:00.000Z",
+        "availableUntil": "2023-03-11T23:59:59.000Z",
+        "points": 55
+      },
+      {
+        "_id": "Q303",
+        "title": "Spacecraft Subsystems Quiz",
+        "dueDate": "2023-04-07T23:59:59.000Z",
+        "availableFrom": "2023-04-02T00:00:00.000Z",
+        "availableUntil": "2023-04-08T23:59:59.000Z",
+        "points": 50
+      },
+      {
+        "_id": "Q304",
+        "title": "Mission Planning and Design Quiz",
+        "dueDate": "2023-05-05T23:59:59.000Z",
+        "availableFrom": "2023-04-30T00:00:00.000Z",
+        "availableUntil": "2023-05-06T23:59:59.000Z",
+        "points": 40
+      }
+    ]
+  },
+  {
+    "_id": "RS104",
+    "name": "Organic Chemistry",
+    "number": "CH1230",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "D134",
+    "credits": 3,
+    "description": "Organic Chemistry focuses on the structure, properties, composition, reactions, and synthesis of carbon-based compounds. This course covers fundamental concepts including molecular orbital theory, stereochemistry, reaction mechanisms, and functional group transformations. Students will learn to predict reaction outcomes and design synthetic pathways. Laboratory work emphasizes synthesis techniques, purification methods, and spectroscopic analysis, providing hands-on experience with the principles of organic chemistry.",
+    "assignments": [
+      {
+        "_id": "A401",
+        "name": "Functional Groups Worksheet",
+        "points": 50,
+        "description": "Identify functional groups in a set of organic molecules.",
+        "dueDate": "2023-02-03T00:00:00.000Z",
+        "AvailableFrom": "2023-01-15T00:00:00.000Z",
+        "AvailableUntil": "2023-02-04T00:00:00.000Z"
+      },
+      {
+        "_id": "A402",
+        "name": "Reaction Mechanism Report",
+        "points": 90,
+        "description": "Draw step-by-step mechanisms for substitution and elimination reactions.",
+        "dueDate": "2023-03-07T00:00:00.000Z",
+        "AvailableFrom": "2023-02-10T00:00:00.000Z",
+        "AvailableUntil": "2023-03-08T00:00:00.000Z"
+      },
+      {
+        "_id": "A403",
+        "name": "Synthesis Planning Project",
+        "points": 120,
+        "description": "Propose a multi-step synthesis route to a target molecule.",
+        "dueDate": "2023-04-14T00:00:00.000Z",
+        "AvailableFrom": "2023-03-20T00:00:00.000Z",
+        "AvailableUntil": "2023-04-15T00:00:00.000Z"
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q401",
+        "title": "Functional Groups and Nomenclature Quiz",
+        "dueDate": "2023-01-27T23:59:59.000Z",
+        "availableFrom": "2023-01-22T00:00:00.000Z",
+        "availableUntil": "2023-01-28T23:59:59.000Z",
+        "points": 30
+      },
+      {
+        "_id": "Q402",
+        "title": "Stereochemistry and Isomerism Quiz",
+        "dueDate": "2023-02-24T23:59:59.000Z",
+        "availableFrom": "2023-02-19T00:00:00.000Z",
+        "availableUntil": "2023-02-25T23:59:59.000Z",
+        "points": 40
+      },
+      {
+        "_id": "Q403",
+        "title": "Reaction Mechanisms Quiz",
+        "dueDate": "2023-03-17T23:59:59.000Z",
+        "availableFrom": "2023-03-12T00:00:00.000Z",
+        "availableUntil": "2023-03-18T23:59:59.000Z",
+        "points": 50
+      },
+      {
+        "_id": "Q404",
+        "title": "Synthesis and Spectroscopy Quiz",
+        "dueDate": "2023-04-21T23:59:59.000Z",
+        "availableFrom": "2023-04-16T00:00:00.000Z",
+        "availableUntil": "2023-04-22T23:59:59.000Z",
+        "points": 45
+      }
+    ]
+  },
+  {
+    "_id": "RS105",
+    "name": "Inorganic Chemistry",
+    "number": "CH1240",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "D134",
+    "credits": 3,
+    "description": "Inorganic Chemistry focuses on the properties, structures, and behaviors of inorganic and organometallic compounds. This course covers a range of topics including coordination chemistry, metal complexes, bonding theories, symmetry, and crystal field theory. Students will also explore the role of inorganic chemistry in real-world applications such as catalysis, materials science, and bioinorganic processes. Laboratory work emphasizes synthesis and analysis of inorganic compounds, fostering a deeper understanding of theoretical concepts.",
+    "assignments": [
+      {
+        "_id": "A501",
+        "name": "Coordination Complex Worksheet",
+        "points": 60,
+        "description": "Determine geometry and oxidation states for metal complexes.",
+        "dueDate": "2023-02-07T00:00:00.000Z",
+        "AvailableFrom": "2023-01-18T00:00:00.000Z",
+        "AvailableUntil": "2023-02-08T00:00:00.000Z"
+      },
+      {
+        "_id": "A502",
+        "name": "Crystal Field Theory Analysis",
+        "points": 110,
+        "description": "Apply crystal field theory to predict d-orbital splitting.",
+        "dueDate": "2023-03-14T00:00:00.000Z",
+        "AvailableFrom": "2023-02-15T00:00:00.000Z",
+        "AvailableUntil": "2023-03-15T00:00:00.000Z"
+      },
+      {
+        "_id": "A503",
+        "name": "Catalysis Research Paper",
+        "points": 130,
+        "description": "Survey important industrial catalysts and their mechanisms.",
+        "dueDate": "2023-04-19T00:00:00.000Z",
+        "AvailableFrom": "2023-03-25T00:00:00.000Z",
+        "AvailableUntil": "2023-04-20T00:00:00.000Z"
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q501",
+        "title": "Periodic Trends and Bonding Quiz",
+        "dueDate": "2023-02-01T23:59:59.000Z",
+        "availableFrom": "2023-01-27T00:00:00.000Z",
+        "availableUntil": "2023-02-02T23:59:59.000Z",
+        "points": 35
+      },
+      {
+        "_id": "Q502",
+        "title": "Coordination Chemistry Quiz",
+        "dueDate": "2023-02-22T23:59:59.000Z",
+        "availableFrom": "2023-02-17T00:00:00.000Z",
+        "availableUntil": "2023-02-23T23:59:59.000Z",
+        "points": 40
+      },
+      {
+        "_id": "Q503",
+        "title": "Crystal Field Theory Quiz",
+        "dueDate": "2023-03-24T23:59:59.000Z",
+        "availableFrom": "2023-03-19T00:00:00.000Z",
+        "availableUntil": "2023-03-25T23:59:59.000Z",
+        "points": 45
+      },
+      {
+        "_id": "Q504",
+        "title": "Catalysis and Applications Quiz",
+        "dueDate": "2023-04-26T23:59:59.000Z",
+        "availableFrom": "2023-04-21T00:00:00.000Z",
+        "availableUntil": "2023-04-27T23:59:59.000Z",
+        "points": 40
+      }
+    ]
+  },
+  {
+    "_id": "RS106",
+    "name": "Physical Chemistry",
+    "number": "CH1250",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "D134",
+    "credits": 3,
+    "description": "Physical Chemistry merges the principles of physics and chemistry to understand the physical properties of molecules, the forces that act upon them, and the chemical reactions they undergo. Key topics include thermodynamics, kinetics, quantum mechanics, and spectroscopy. The course provides a comprehensive understanding of molecular behavior, reaction dynamics, and the application of mathematical methods in solving chemical problems. Labs focus on experimental techniques and data analysis, equipping students with skills necessary for research and advanced study in chemistry and related fields.",
+    "assignments": [
+      {
+        "_id": "A601",
+        "name": "Thermodynamics Problem Set",
+        "points": 70,
+        "description": "Solve advanced problems on free energy and equilibrium.",
+        "dueDate": "2023-02-11T00:00:00.000Z",
+        "AvailableFrom": "2023-01-22T00:00:00.000Z",
+        "AvailableUntil": "2023-02-12T00:00:00.000Z"
+      },
+      {
+        "_id": "A602",
+        "name": "Quantum Mechanics Report",
+        "points": 90,
+        "description": "Explain particle-in-a-box and harmonic oscillator solutions.",
+        "dueDate": "2023-03-21T00:00:00.000Z",
+        "AvailableFrom": "2023-02-25T00:00:00.000Z",
+        "AvailableUntil": "2023-03-22T00:00:00.000Z"
+      },
+      {
+        "_id": "A603",
+        "name": "Spectroscopy Lab Write-up",
+        "points": 100,
+        "description": "Interpret IR and NMR spectra for unknown compounds.",
+        "dueDate": "2023-04-26T00:00:00.000Z",
+        "AvailableFrom": "2023-03-30T00:00:00.000Z",
+        "AvailableUntil": "2023-04-27T00:00:00.000Z"
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q601",
+        "title": "Thermodynamics Laws Quiz",
+        "dueDate": "2023-02-04T23:59:59.000Z",
+        "availableFrom": "2023-01-30T00:00:00.000Z",
+        "availableUntil": "2023-02-05T23:59:59.000Z",
+        "points": 40
+      },
+      {
+        "_id": "Q602",
+        "title": "Chemical Kinetics Quiz",
+        "dueDate": "2023-03-04T23:59:59.000Z",
+        "availableFrom": "2023-02-27T00:00:00.000Z",
+        "availableUntil": "2023-03-05T23:59:59.000Z",
+        "points": 45
+      },
+      {
+        "_id": "Q603",
+        "title": "Quantum Chemistry Quiz",
+        "dueDate": "2023-04-01T23:59:59.000Z",
+        "availableFrom": "2023-03-27T00:00:00.000Z",
+        "availableUntil": "2023-04-02T23:59:59.000Z",
+        "points": 50
+      },
+      {
+        "_id": "Q604",
+        "title": "Spectroscopy Techniques Quiz",
+        "dueDate": "2023-05-03T23:59:59.000Z",
+        "availableFrom": "2023-04-28T00:00:00.000Z",
+        "availableUntil": "2023-05-04T23:59:59.000Z",
+        "points": 35
+      }
+    ]
+  },
+  {
+    "_id": "RS107",
+    "name": "Ancient Languages and Scripts of Middle-earth",
+    "number": "ME101",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Languages",
+    "credits": 3,
+    "description": "This course offers an exploration of the ancient languages and scripts found throughout Middle-earth, including Elvish (Sindarin and Quenya), Dwarvish (Khuzdul), and the Black Speech of Mordor. Students will learn the historical and cultural contexts of these languages, their linguistic structures, and their usage in various inscriptions and texts. Emphasis is on understanding the philological aspects and the role of language in shaping Middle-earth's history and lore.",
+    "author": "654f9ec2ea7ead465908d1e3",
+    "assignments": [
+      {
+        "_id": "A701",
+        "name": "Elvish Translation Exercises",
+        "points": 75,
+        "description": "Translate short passages from Sindarin and Quenya.",
+        "dueDate": "2023-02-06T00:00:00.000Z",
+        "AvailableFrom": "2023-01-15T00:00:00.000Z",
+        "AvailableUntil": "2023-02-07T00:00:00.000Z"
+      },
+      {
+        "_id": "A702",
+        "name": "Dwarvish Runes Assignment",
+        "points": 85,
+        "description": "Transcribe names into Khuzdul runes and explain phonetics.",
+        "dueDate": "2023-03-09T00:00:00.000Z",
+        "AvailableFrom": "2023-02-12T00:00:00.000Z",
+        "AvailableUntil": "2023-03-10T00:00:00.000Z"
+      },
+      {
+        "_id": "A703",
+        "name": "Black Speech Linguistics Essay",
+        "points": 120,
+        "description": "Analyze morphology and syntax of the Black Speech of Mordor.",
+        "dueDate": "2023-04-17T00:00:00.000Z",
+        "AvailableFrom": "2023-03-20T00:00:00.000Z",
+        "AvailableUntil": "2023-04-18T00:00:00.000Z"
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q701",
+        "title": "Elvish Languages Basics Quiz",
+        "dueDate": "2023-01-30T23:59:59.000Z",
+        "availableFrom": "2023-01-25T00:00:00.000Z",
+        "availableUntil": "2023-01-31T23:59:59.000Z",
+        "points": 25
+      },
+      {
+        "_id": "Q702",
+        "title": "Sindarin Grammar Quiz",
+        "dueDate": "2023-02-20T23:59:59.000Z",
+        "availableFrom": "2023-02-15T00:00:00.000Z",
+        "availableUntil": "2023-02-21T23:59:59.000Z",
+        "points": 30
+      },
+      {
+        "_id": "Q703",
+        "title": "Quenya and High Elvish Quiz",
+        "dueDate": "2023-03-20T23:59:59.000Z",
+        "availableFrom": "2023-03-15T00:00:00.000Z",
+        "availableUntil": "2023-03-21T23:59:59.000Z",
+        "points": 35
+      },
+      {
+        "_id": "Q704",
+        "title": "Dwarvish and Black Speech Quiz",
+        "dueDate": "2023-04-24T23:59:59.000Z",
+        "availableFrom": "2023-04-19T00:00:00.000Z",
+        "availableUntil": "2023-04-25T23:59:59.000Z",
+        "points": 40
+      }
+    ]
+  },
+  {
+    "_id": "RS108",
+    "name": "Wizards, Elves, and Men: Inter-species Diplomacy in Middle-earth",
+    "number": "ME102",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Political Studies",
+    "credits": 4,
+    "description": "This course explores the complex relationships and diplomatic interactions among the different races of Middle-earth: Elves, Men, Dwarves, and Wizards. Topics include the study of historical alliances, conflicts, and the role of leadership and wisdom in maintaining peace. Students will engage in discussions and case studies on key events in Middle-earth's history, such as the Council of Elrond and the War of the Ring, to understand the principles of diplomacy and conflict resolution in a multi-species context.",
+    "author": "654f9ec2ea7ead465908d1e3",
+    "assignments": [
+      {
+        "_id": "A801",
+        "name": "Council of Elrond Case Study",
+        "points": 100,
+        "description": "Analyze negotiation tactics used during the Council of Elrond.",
+        "dueDate": "2023-02-12T00:00:00.000Z",
+        "AvailableFrom": "2023-01-22T00:00:00.000Z",
+        "AvailableUntil": "2023-02-13T00:00:00.000Z"
+      },
+      {
+        "_id": "A802",
+        "name": "Race Relations Essay",
+        "points": 120,
+        "description": "Discuss political dynamics among Elves, Men, and Dwarves.",
+        "dueDate": "2023-03-22T00:00:00.000Z",
+        "AvailableFrom": "2023-02-28T00:00:00.000Z",
+        "AvailableUntil": "2023-03-23T00:00:00.000Z"
+      },
+      {
+        "_id": "A803",
+        "name": "Diplomatic Strategy Project",
+        "points": 150,
+        "description": "Design a modern diplomatic framework inspired by Middle-earth.",
+        "dueDate": "2023-04-30T00:00:00.000Z",
+        "AvailableFrom": "2023-04-01T00:00:00.000Z",
+        "AvailableUntil": "2023-05-01T00:00:00.000Z"
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q801",
+        "title": "Middle-earth History Quiz",
+        "dueDate": "2023-02-02T23:59:59.000Z",
+        "availableFrom": "2023-01-28T00:00:00.000Z",
+        "availableUntil": "2023-02-03T23:59:59.000Z",
+        "points": 30
+      },
+      {
+        "_id": "Q802",
+        "title": "Diplomatic Theory Quiz",
+        "dueDate": "2023-03-02T23:59:59.000Z",
+        "availableFrom": "2023-02-25T00:00:00.000Z",
+        "availableUntil": "2023-03-03T23:59:59.000Z",
+        "points": 40
+      },
+      {
+        "_id": "Q803",
+        "title": "Alliance and Conflict Analysis Quiz",
+        "dueDate": "2023-04-06T23:59:59.000Z",
+        "availableFrom": "2023-04-01T00:00:00.000Z",
+        "availableUntil": "2023-04-07T23:59:59.000Z",
+        "points": 45
+      },
+      {
+        "_id": "Q804",
+        "title": "Leadership in Crisis Quiz",
+        "dueDate": "2023-05-10T23:59:59.000Z",
+        "availableFrom": "2023-05-05T00:00:00.000Z",
+        "availableUntil": "2023-05-11T23:59:59.000Z",
+        "points": 35
+      }
+    ]
+  }
+]
