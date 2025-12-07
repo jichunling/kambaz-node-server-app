@@ -145,8 +145,18 @@ export default function QuizzesRoutes(app) {
   const saveDraftAnswer = async (req, res) => {
     try {
       const { courseId, quizId, questionId } = req.params;
-      const { userId, answer } = req.body;
-      if (!userId) return res.status(400).json({ error: "userId is required" });
+      const { answer } = req.body;
+      const currentUser = req.session["currentUser"];
+      if (!currentUser) return res.sendStatus(401);
+      const userId = currentUser._id;
+      // Ensure enrollment exists
+      const enrollmentId = `${userId}-${courseId}`;
+      const model = (await import('../Enrollments/model.js')).default;
+      let enrollment = await model.findOne({ _id: enrollmentId });
+      if (!enrollment) {
+        try { await enrollmentsDao.enrollUserInCourse(userId, courseId); } catch { /* ignore duplicate */ }
+        enrollment = await model.findOne({ _id: enrollmentId });
+      }
       await enrollmentsDao.saveDraftAnswer(userId, courseId, quizId, questionId, answer);
       res.json({ success: true });
     } catch (err) {
@@ -158,8 +168,17 @@ export default function QuizzesRoutes(app) {
   const submitAttempt = async (req, res) => {
     try {
       const { courseId, quizId } = req.params;
-      const { userId, answers, score, totalPoints } = req.body;
-      if (!userId) return res.status(400).json({ error: "userId is required" });
+      const { answers, score, totalPoints } = req.body;
+      const currentUser = req.session["currentUser"];
+      if (!currentUser) return res.sendStatus(401);
+      const userId = currentUser._id;
+      // Ensure enrollment exists
+      const enrollmentId = `${userId}-${courseId}`;
+      const model = (await import('../Enrollments/model.js')).default;
+      let enrollment = await model.findOne({ _id: enrollmentId });
+      if (!enrollment) {
+        try { await enrollmentsDao.enrollUserInCourse(userId, courseId); } catch { /* ignore duplicate */ }
+      }
       const result = await enrollmentsDao.submitAttempt(userId, courseId, quizId, { answers, score, totalPoints });
       res.json(result);
     } catch (err) {
@@ -171,11 +190,15 @@ export default function QuizzesRoutes(app) {
   const getLastAttempt = async (req, res) => {
     try {
       const { courseId, quizId } = req.params;
-      const { userId } = req.query;
-      if (!userId || typeof userId !== 'string') return res.status(400).json({ error: "userId is required" });
+      let { userId } = req.query;
+      if (!userId) {
+        const currentUser = req.session["currentUser"];
+        if (!currentUser) return res.sendStatus(401);
+        userId = currentUser._id;
+      }
       const dao = EnrollmentsDao();
       // Manually read enrollment and compute last attempt
-      const enrollmentId = `${userId}-${courseId}`;
+      const enrollmentId = `${String(userId)}-${courseId}`;
       const model = (await import('../Enrollments/model.js')).default;
       const enrollment = await model.findOne({ _id: enrollmentId });
       if (!enrollment) return res.status(404).json({ error: 'Enrollment not found' });
@@ -201,10 +224,14 @@ export default function QuizzesRoutes(app) {
   const getAttemptsCount = async (req, res) => {
     try {
       const { courseId, quizId } = req.params;
-      const { userId } = req.query;
-      if (!userId || typeof userId !== 'string') return res.status(400).json({ error: "userId is required" });
+      let { userId } = req.query;
+      if (!userId) {
+        const currentUser = req.session["currentUser"];
+        if (!currentUser) return res.sendStatus(401);
+        userId = currentUser._id;
+      }
       const model = (await import('../Enrollments/model.js')).default;
-      const enrollmentId = `${userId}-${courseId}`;
+      const enrollmentId = `${String(userId)}-${courseId}`;
       const enrollment = await model.findOne({ _id: enrollmentId });
       if (!enrollment) return res.json({ count: 0 });
       const attempts = (enrollment.quizAttempts ?? []).filter(a => a.quizId === quizId && a.finalized === true).length;
