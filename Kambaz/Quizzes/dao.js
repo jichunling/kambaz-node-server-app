@@ -103,4 +103,24 @@ export async function createQuestion(courseId, quizId, question) {
   return newQuestion;
 }
 
+export async function deleteQuestion(courseId, quizId, questionId) {
+  console.log("---Quiz DAO deleteQuestion---");
+  console.log("courseId:", courseId);
+  console.log("quizId:", quizId);
+  console.log("questionId:", questionId);
+  const result = await courseModel.updateOne(
+    { _id: courseId, "quizzes._id": quizId },
+    { $pull: { "quizzes.$.questions": { _id: questionId } } }
+  );
+  console.log("deleteQuestion updateOne result:", result);
+  if ((result.matchedCount ?? result.n) === 0) {
+    throw new Error("Course or Quiz not found");
+  }
+  // If nothing was modified, the question didn't exist
+  if ((result.modifiedCount ?? result.nModified ?? 0) === 0) {
+    throw new Error("Question not found");
+  }
+  return { success: true };
+}
+
 

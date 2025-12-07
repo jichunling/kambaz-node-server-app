@@ -1,7 +1,8 @@
 import {
   createQuiz as daoCreateQuiz, findQuizzesForCourse as daoFindQuizzesForCourse,
   deleteQuiz as daoDeleteQuiz, updateQuiz as daoUpdateQuiz,
-  updateQuizPublishStatus as daoUpdateQuizPublishStatus, createQuestion as daoCreateQuestion
+  updateQuizPublishStatus as daoUpdateQuizPublishStatus, createQuestion as daoCreateQuestion,
+  deleteQuestion as daoDeleteQuestion
 } from "../Quizzes/dao.js";
 
 
@@ -118,6 +119,26 @@ export default function QuizzesRoutes(app) {
     }
   };
 
+  // Delete a question from a quiz
+  const deleteQuestion = async (req, res) => {
+    try {
+      const { courseId, quizId, qid, questionId } = req.params;
+      const resolvedQuizId = quizId || qid;
+      const result = await daoDeleteQuestion(courseId, resolvedQuizId, questionId);
+      return res.json(result);
+    } catch (err) {
+      if (err && typeof err.message === "string") {
+        if (err.message.includes("Course or Quiz not found")) {
+          return res.status(404).json({ error: err.message });
+        }
+        if (err.message.includes("Question not found")) {
+          return res.status(404).json({ error: err.message });
+        }
+      }
+      return res.status(500).json({ error: "Failed to delete question" });
+    }
+  };
+
   const createQuizForCourse = async (req, res) => {
     console.log('----Quiz Routes create Quiz For Course------');
     const { courseId } = req.params;
@@ -161,5 +182,7 @@ export default function QuizzesRoutes(app) {
   // Questions (support both :quizId and :qid param names)
   app.post("/api/courses/:courseId/quizzes/:quizId/questions", createQuestion);
   app.post("/api/courses/:courseId/quizzes/:qid/questions", createQuestion);
+  app.delete("/api/courses/:courseId/quizzes/:quizId/questions/:questionId", deleteQuestion);
+  app.delete("/api/courses/:courseId/quizzes/:qid/questions/:questionId", deleteQuestion);
 
 }
