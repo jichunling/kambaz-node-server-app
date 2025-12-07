@@ -4,9 +4,11 @@ import {
   updateQuizPublishStatus as daoUpdateQuizPublishStatus, createQuestion as daoCreateQuestion,
   deleteQuestion as daoDeleteQuestion
 } from "../Quizzes/dao.js";
+import EnrollmentsDao from "../Enrollments/dao.js";
 
 
 export default function QuizzesRoutes(app) {
+  const enrollmentsDao = EnrollmentsDao();
 
   const findQuizzesForCourse = async (req, res) => {
     const { courseId } = req.params;
@@ -139,6 +141,79 @@ export default function QuizzesRoutes(app) {
     }
   };
 
+  // Save a single draft answer (student)
+  const saveDraftAnswer = async (req, res) => {
+    try {
+      const { courseId, quizId, questionId } = req.params;
+      const { userId, answer } = req.body;
+      if (!userId) return res.status(400).json({ error: "userId is required" });
+      await enrollmentsDao.saveDraftAnswer(userId, courseId, quizId, questionId, answer);
+      res.json({ success: true });
+    } catch (err) {
+      res.status(500).json({ error: "Failed to save draft answer" });
+    }
+  };
+
+  // Submit full quiz attempt (student)
+  const submitAttempt = async (req, res) => {
+    try {
+      const { courseId, quizId } = req.params;
+      const { userId, answers, score, totalPoints } = req.body;
+      if (!userId) return res.status(400).json({ error: "userId is required" });
+      const result = await enrollmentsDao.submitAttempt(userId, courseId, quizId, { answers, score, totalPoints });
+      res.json(result);
+    } catch (err) {
+      res.status(500).json({ error: "Failed to submit quiz attempt" });
+    }
+  };
+
+  // Get last finalized attempt for a student
+  const getLastAttempt = async (req, res) => {
+    try {
+      const { courseId, quizId } = req.params;
+      const { userId } = req.query;
+      if (!userId || typeof userId !== 'string') return res.status(400).json({ error: "userId is required" });
+      const dao = EnrollmentsDao();
+      // Manually read enrollment and compute last attempt
+      const enrollmentId = `${userId}-${courseId}`;
+      const model = (await import('../Enrollments/model.js')).default;
+      const enrollment = await model.findOne({ _id: enrollmentId });
+      if (!enrollment) return res.status(404).json({ error: 'Enrollment not found' });
+      const attempts = (enrollment.quizAttempts ?? []).filter(a => a.quizId === quizId && a.finalized === true);
+      if (attempts.length === 0) return res.json(null);
+      const last = attempts.reduce((max, a) => (a.attemptNumber > max.attemptNumber ? a : max));
+      // Convert Map to plain object
+      const answers = Object.fromEntries(last.answers ?? []);
+      return res.json({
+        quizId: last.quizId,
+        attemptNumber: last.attemptNumber,
+        answers,
+        score: last.score,
+        totalPoints: last.totalPoints,
+        takenAt: last.takenAt,
+      });
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch last attempt' });
+    }
+  };
+
+  // Get count of finalized attempts for a student
+  const getAttemptsCount = async (req, res) => {
+    try {
+      const { courseId, quizId } = req.params;
+      const { userId } = req.query;
+      if (!userId || typeof userId !== 'string') return res.status(400).json({ error: "userId is required" });
+      const model = (await import('../Enrollments/model.js')).default;
+      const enrollmentId = `${userId}-${courseId}`;
+      const enrollment = await model.findOne({ _id: enrollmentId });
+      if (!enrollment) return res.json({ count: 0 });
+      const attempts = (enrollment.quizAttempts ?? []).filter(a => a.quizId === quizId && a.finalized === true).length;
+      return res.json({ count: attempts });
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch attempts count' });
+    }
+  };
+
   const createQuizForCourse = async (req, res) => {
     console.log('----Quiz Routes create Quiz For Course------');
     const { courseId } = req.params;
@@ -184,5 +259,10 @@ export default function QuizzesRoutes(app) {
   app.post("/api/courses/:courseId/quizzes/:qid/questions", createQuestion);
   app.delete("/api/courses/:courseId/quizzes/:quizId/questions/:questionId", deleteQuestion);
   app.delete("/api/courses/:courseId/quizzes/:qid/questions/:questionId", deleteQuestion);
+  // Student answers
+  app.post("/api/courses/:courseId/quizzes/:quizId/answers/:questionId", saveDraftAnswer);
+  app.post("/api/courses/:courseId/quizzes/:quizId/attempts", submitAttempt);
+  app.get("/api/courses/:courseId/quizzes/:quizId/attempts/last", getLastAttempt);
+  app.get("/api/courses/:courseId/quizzes/:quizId/attempts/count", getAttemptsCount);
 
 }
